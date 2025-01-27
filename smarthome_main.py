@@ -197,7 +197,7 @@ def usb_scan_and_parse(cmd_echo = True):
                 mac_addr_receiver[int(i / 6)][i % 6] = 0xFF # Clear the list entries
 
         # Update a receiver's MAC address, wr mac add NUM ADDR 
-        elif string[0:11] == "wr mac upd ":
+        elif string.startswith("wr mac upd"):
             parts = string.split()
             if len(parts) == 5: # The command consists of exactly five part
                 try:
@@ -245,7 +245,7 @@ def usb_scan_and_parse(cmd_echo = True):
             print("%.1f" % temp)
 
         # Write the temperature calibration values, wr temp cal T1 A1 T2 A2
-        elif string[0:12] == "wr temp cal ":
+        elif string.startswith("wr temp cal"):
             parts = string.split()
             if len(parts) == 7: # The command consists of exactly seven part
                 try:
@@ -266,7 +266,7 @@ def usb_scan_and_parse(cmd_echo = True):
                 print("Invalid number of parameters")
             
         # Broadcast a message, wr bc msg MESSAGE
-        elif string[0:10] == "wr bc msg ":
+        elif string.startswith("wr bc msg"):
             msg = string[10:]
             if len(msg) > 0 and len(msg) < 250: # Max 249 chars since the first is an *
                 en.esp_now_send_message(en.MAC_ADDR_BROADCAST, '*' + msg)
@@ -274,7 +274,7 @@ def usb_scan_and_parse(cmd_echo = True):
                 print("Message missing or to long")
 
         # Set the show broadcasts, wr bc show VALUE
-        elif string[0:11] == "wr bc show ":
+        elif string("wr bc show"):
             parts = string.split()
             if len(parts) == 4: # The command consists of exactly four part
                 try:
@@ -290,7 +290,7 @@ def usb_scan_and_parse(cmd_echo = True):
                 print("Invalid command")
                 
         # Set the broadcast interval, wr bc int INTERVAL
-        elif string[0:10] == "wr bc int ":
+        elif string.startswith("wr bc int"):
             parts = string.split()
             if len(parts) == 4: # The command consists of exactly four part
                 try:
@@ -306,7 +306,7 @@ def usb_scan_and_parse(cmd_echo = True):
                 print("Invalid command")                
 
         # Send a mesage to a receiver with an index number, wr rx NUM MESSAGE or wr rx ADDR MESSAGE
-        elif string[0:6] == "wr rx ":
+        elif string.startswith("wr rx"):
             parts = string.split()
             if len(parts) >= 4: # The command consists of exactly four part, but the message could be with multiple spaces
                 try:
@@ -344,11 +344,11 @@ def usb_scan_and_parse(cmd_echo = True):
                 print("Incomplete command")                
 
         # Set the user name, wr user NAME
-        elif string[0:8] == "wr user ":
+        elif string.startswith("wr user"):
             parts = string.split()
             if len(parts) >= 3: # The command consists of exactly three part, but the name could be with multiple spaces
                 try:
-                    name = string[8:].strip() # Extract the name from the string
+                    name = ' '.join(parts[2:]).strip()[:20] # Extract the name from the string
                     if len(name) > 0 and len(name) <= 20:
                         user_name = name
                         eeprom.write_string(EEPROM_USER_NAME, user_name)
@@ -435,7 +435,7 @@ broadcast_interval = eeprom.read_byte(EEPROM_BROADCAST_INTERVAL)
 # Load the user name
 user_name = eeprom.read_string(EEPROM_USER_NAME)
 if len(user_name) > 20:                # Trunc a user name longer than 20 chars
-    user_name = used_name[0:20]
+    user_name = user_name[0:20]
     eeprom.write_byte(EEPROM_USER_NAME, 20) # Also set it to max 20
 
 # Load receivers' MAC addresses into list and print to dashboard
