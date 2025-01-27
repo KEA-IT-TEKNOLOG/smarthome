@@ -35,7 +35,7 @@ show_broadcast_messages = 1            # Show received broadcast messages: 0: no
 
 broadcast_interval = 60                # Auto broadcast interval in s, 0 = no broadcast
 
-user_name = ""                         # The user name/handle
+user_name = "DIT NAVN HER"             # The user name/handle
 
 ########################################
 # EEPROM MAP
@@ -158,12 +158,12 @@ def write_defaults():
 
 
 def print_configuration():
-    print("User name               : %s" % user_name)
+    print(f'User name               : {user_name}')
     print()
-    print("Show broadcast messages : %d" % show_broadcast_messages)
-    print("Broadcast interval [s]  : %d" % broadcast_interval)
+    print(f'Show broadcast messages : {show_broadcast_messages}')
+    print(f'Broadcast interval [s]  : {broadcast_interval}')
     print()
-    print("Dashboard MAC address   : %s" % misc.get_mac_address())
+    print(f'Dashboard MAC address   : {misc.get_mac_address()}')
     print_mac_addr_list()
     print()
 
