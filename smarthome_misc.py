@@ -7,7 +7,7 @@ import network
 ########################################
 # OBJECTS
 adc_lmt84 = ADC(Pin(35))             
-adc_lmt84.atten(ADC.ATTN_2_5DB)        # 100 mV to 1,25 V, i.e. from about -40 °C and up to the maximum temperature for the LMT84
+adc_lmt84.atten(ADC.ATTN_11DB)        # 100 mV to 1,25 V, i.e. from about -40 °C and up to the maximum temperature for the LMT84
 # LMT84 datasheet
 # V = (-5.50 mV/°C) T + 1035 mV
 # T = (V - 1035 mV) / (-5.5 mV/°C)
