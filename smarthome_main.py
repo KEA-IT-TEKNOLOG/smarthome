@@ -274,7 +274,7 @@ def usb_scan_and_parse(cmd_echo = True):
                 print("Message missing or to long")
 
         # Set the show broadcasts, wr bc show VALUE
-        elif string("wr bc show"):
+        elif string.startswith("wr bc show"):
             parts = string.split()
             if len(parts) == 4: # The command consists of exactly four part
                 try:
