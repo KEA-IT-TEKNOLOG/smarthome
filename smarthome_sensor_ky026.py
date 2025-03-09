@@ -15,7 +15,7 @@ from adc_sub import ADC_substitute
 
 ########################################
 # CONFIGURATION
-dashboard_mac_address = b'\xA1\xB2\xC3\xD4\xE5\xF6' # MAC address of dashboard (Educaboard). Byte string format!
+dashboard_mac_address = b'INSERT MAC HERE IN CORRECT FORMAT EG: \xA1\xB2\xC3\xD4\xE5\xF6' # MAC address of dashboard (Educaboard). Byte string format!
 
 # Sensor
 sensor_id = "Flame"                    # The sensor ID
