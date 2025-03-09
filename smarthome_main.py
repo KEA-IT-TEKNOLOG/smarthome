@@ -496,9 +496,9 @@ while True:
                 lcd.print_received_frame(mac_addr, msg)
                 print("Broadcast " + mac_addr + "  " + msg[1:]) # Remove the broadcast identifier *
         else:
-           lcd.print_received_frame(mac_addr, msg)
-           print("Message   " + mac_addr + "  " + msg)
-           # Do something with the direct messages here
+            lcd.print_received_frame(mac_addr, msg)
+            print("Message   " + mac_addr + "  " + msg)
+            # Do something with the direct messages here
            
     # *********************************************************************************************
  
